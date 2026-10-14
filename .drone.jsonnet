@@ -18,11 +18,11 @@ local distros = ['bookworm', 'buster'];
 
 local platform_image(distro) = 'syncloud/platform-' + distro + ':' + platform;
 
-local e2e(step, project, spec) = {
+local e2e(step, project, spec, prefix='') = {
   name: step,
   image: playwright,
   commands: ['./ci/ui.sh ' + project + ' ' + name + ' ' + distro_default + ' ' + spec],
-  environment: { DEVICE_USER: 'user', DEVICE_PASSWORD: 'Password1' },
+  environment: { DEVICE_USER: 'user', DEVICE_PASSWORD: 'Password1', SCREENSHOT_PREFIX: prefix },
 };
 
 local build(arch, test_ui) = [{
@@ -97,6 +97,12 @@ local build(arch, test_ui) = [{
     for distro in distros
   ] + (if test_ui then [
          e2e('e2e', 'desktop', 'specs/01-smoke.spec.ts'),
+         {
+           name: 'test-upgrade-prev',
+           image: 'python:' + python,
+           commands: ['./ci/test.sh upgrade_prev.py ' + distro_default + ' ' + name],
+         },
+         e2e('e2e-prev', 'desktop', 'specs/01-smoke.spec.ts', 'store-'),
          {
            name: 'workstation',
            image: 'ubuntu:' + ubuntu,

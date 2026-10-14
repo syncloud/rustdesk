@@ -41,10 +41,10 @@ onUnmounted(() => {
 
 <template>
   <div class="sc-card" data-testid="server-card">
-    <h1 class="sc-title">RustDesk Server</h1>
+    <h1 class="sc-title">RustDesk</h1>
     <p class="sc-lead">
-      Your own ID and relay server. Point RustDesk clients at it and remote sessions stop going
-      through the public RustDesk servers.
+      Reach your computers from anywhere with RustDesk. Connect the RustDesk app on each computer
+      to this device and your remote sessions go through it, not through RustDesk's public servers.
     </p>
 
     <template v-if="server">
