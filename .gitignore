@@ -1,0 +1,11 @@
+.idea
+venv
+*.iml
+build
+artifact
+version
+package.name
+*.snap
+node_modules
+.drone.yml
+__pycache__
