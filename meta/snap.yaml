@@ -1,6 +1,6 @@
 name: rustdesk
-summary: RustDesk Server
-description: RustDesk ID and relay server for remote desktop access
+summary: RustDesk
+description: Open-source remote desktop, an alternative to TeamViewer
 grade: stable
 
 apps:
