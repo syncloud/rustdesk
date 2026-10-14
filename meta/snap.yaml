@@ -1,6 +1,6 @@
 name: rustdesk
 summary: RustDesk
-description: Open-source remote desktop, an alternative to TeamViewer
+description: Remote desktop, an alternative to TeamViewer
 grade: stable
 
 apps:
