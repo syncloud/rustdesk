@@ -25,6 +25,6 @@ func (t *authTransport) RoundTrip(r *http.Request) (*http.Response, error) {
 	viaSocket.URL.Scheme = "http"
 	viaSocket.Host = r.URL.Host
 	viaSocket.Header.Set("X-Forwarded-Proto", "https")
-	viaSocket.Header.Set("X-Forwarded-Host", r.URL.Hostname())
+	viaSocket.Header.Set("X-Forwarded-Host", r.URL.Host)
 	return t.socket.RoundTrip(viaSocket)
 }

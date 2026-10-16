@@ -178,6 +178,15 @@ func TestAuthTransport_OverSocket(t *testing.T) {
 	assert.Contains(t, string(body), `"proto":"https"`,
 		"without forwarded headers Authelia advertises http://localhost as the issuer")
 	assert.Contains(t, string(body), `"fwdhost":"auth.example.com"`)
+
+	resp, err = client.Get("https://auth.example.com:10443/.well-known/openid-configuration")
+	require.NoError(t, err)
+	defer resp.Body.Close()
+	body, err = io.ReadAll(resp.Body)
+	require.NoError(t, err)
+
+	assert.Contains(t, string(body), `"host":"auth.example.com:10443"`)
+	assert.Contains(t, string(body), `"fwdhost":"auth.example.com:10443"`)
 }
 
 func TestLogout_EndsTheAutheliaSessionToo(t *testing.T) {
